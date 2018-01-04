@@ -8,7 +8,7 @@ const headers = {
 }
 
 
-export const fetchCategories = () => {
+export const getCategories = () => {
   return(
     fetch(
       `${api}/categories`,
@@ -17,14 +17,16 @@ export const fetchCategories = () => {
         headers: headers,
       }
     ).then(
-      d => d.json()
+      response => response.json()
+    ).then(
+      data => data.categories
     ).catch(error => {
       return error
     })
   )
 }
 
-export const fetchCategoryPosts = (category) => {
+export const getCategoryPosts = (category) => {
   return(
     fetch(
       `${api}/${category}/posts`,
@@ -40,7 +42,7 @@ export const fetchCategoryPosts = (category) => {
   )
 }
 
-export const fetchPosts = () => {
+export const getPosts = () => {
   return(
     fetch(
       `${api}/posts`,
@@ -49,7 +51,9 @@ export const fetchPosts = () => {
         headers: headers,
       }
     ).then(
-      (d) => d.json()
+      d => d.json()
+    ).then(
+      data => data
     ).catch(error => {
       return error
     })
@@ -73,7 +77,7 @@ export const addPost = (postinfo) => {
   )
 }
 
-export const fetchPostById = (id) => {
+export const getPostById = (id) => {
   return(
     fetch(
       `${api}/posts/${id}`,
@@ -139,7 +143,7 @@ export const deletePost = (id) => {
   )
 }
 
-export const fetchPostCommentsById = (id) => {
+export const getPostCommentsById = (id) => {
   return(
     fetch(
       `${api}/posts/${id}/comments`,
@@ -172,7 +176,7 @@ export const addComment = (commentinfo) => {
   )
 }
 
-export const fetchCommentsById = (id) => {
+export const getCommentsById = (id) => {
   return(
     fetch(
       `${api}/comments/${id}`,
