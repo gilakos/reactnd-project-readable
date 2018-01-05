@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
+import { timestampFormat, fromNow } from '../utils/helpers'
 
 class PostItem extends Component {
   render() {
@@ -6,10 +9,12 @@ class PostItem extends Component {
 
     return (
       <div>
-        <h3> {post.title} </h3>
+        <Link to={`/post/${post.id}`} >
+          <h3> {post.title} </h3>
+        </Link>
         <h5> Author: {post.author} </h5>
         <h6> Category: {post.category} </h6>
-        <p> Posted: {post.timestamp} </p>
+        <time> Posted: {fromNow(post.timestamp)} </time>
         <p> controls here </p>
       </div>
     )

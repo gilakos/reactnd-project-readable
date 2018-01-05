@@ -16,7 +16,7 @@ const post = (state = {}, action) => {
       }
 
     default:
-      return state;
+      return state
   }
 }
 

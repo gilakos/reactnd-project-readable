@@ -7,7 +7,7 @@ class PostToDo extends Component {
         <h3>Post</h3>
         <ul>
           <li>
-            should show the details of a post, including: Title, Body, Author,
+            DONE: should show the details of a post, including: Title, Body, Author,
             timestamp (in user readable format), and vote score
           </li>
           <li>should list all of the comments for that post</li>

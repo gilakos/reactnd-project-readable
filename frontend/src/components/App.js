@@ -7,6 +7,7 @@ import { fetchPosts } from '../actions/posts'
 
 import AppHeader from './AppHeader'
 import PostList from './PostList'
+import PostDetail from './PostDetail'
 import CategoryList from './CategoryList'
 import PostToDo from './PostToDo'
 import CreateEditPost from './CreateEditPost'
@@ -34,7 +35,8 @@ class App extends Component {
             <Route exact path="/" component={PostList} />
             <Route exact path="/category/:category" component={PostList} />
             <Route path="/category" component={CategoryList} />
-            <Route path="/post" component={PostToDo} />
+            <Route exact path="/post/:id" component={PostDetail} />
+            <Route exact path="/post" component={PostToDo} />
             <Route path="/create-edit" component={CreateEditPost} />
           </Switch>
           <hr />
