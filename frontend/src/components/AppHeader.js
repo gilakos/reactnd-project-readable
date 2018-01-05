@@ -13,6 +13,7 @@ class AppHeader extends Component {
       <nav>
         <Link to="/">Home</Link>
         <div>
+          <h6>Categories</h6>
           <ul>
             { categories !== undefined && categories.map(
               category => (
@@ -30,6 +31,7 @@ class AppHeader extends Component {
             )}
           </ul>
         </div>
+        <h6>ToDo</h6>
         <ul>
           <li>
             <Link to="/category">Category</Link>

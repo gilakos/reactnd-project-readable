@@ -6,15 +6,15 @@ import { fetchCategories } from '../actions/categories'
 import { fetchPosts } from '../actions/posts'
 
 import AppHeader from './AppHeader'
-import PostGrid from './PostGrid'
-import CategoryGrid from './CategoryGrid'
-import PostItem from './PostItem'
+import PostList from './PostList'
+import CategoryList from './CategoryList'
+import PostToDo from './PostToDo'
 import CreateEditPost from './CreateEditPost'
 
 class App extends Component {
   static propTypes = {
     getCategories: PropTypes.func.isRequired,
-    getPosts: PropTypes.func.isRequired,
+    getPosts: PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -24,18 +24,37 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Switch>
-          <Route path="/" component={AppHeader} />
-        </Switch>
-        <hr />
-        <Switch>
-          <Route exact path="/" component={PostGrid} />
-          {/* <Route path="/category" component={CategoryGrid} />
-          <Route path="/post" component={PostItem} />
-          <Route path="/create-edit" component={CreateEditPost} /> */}
-        </Switch>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path="/" component={AppHeader} />
+          </Switch>
+          <hr />
+          <Switch>
+            <Route exact path="/" component={PostList} />
+            <Route exact path="/category/:category" component={PostList} />
+            <Route path="/category" component={CategoryList} />
+            <Route path="/post" component={PostToDo} />
+            <Route path="/create-edit" component={CreateEditPost} />
+          </Switch>
+          <hr />
+
+          <h3>Home</h3>
+          <ul>
+            <li>
+              DONE: should list all available categories, which should link to a
+              category view for that category
+            </li>
+            <li>DONE: should list all of the posts</li>
+            <li>
+              should have a control for changing the sort method for the list,
+              including at minimum, order by voteScore and order by timestamp
+            </li>
+            <li>should have a control for adding a new post</li>
+          </ul>
+          <h6> Post List below</h6>
+        </div>
+      </BrowserRouter>
     )
   }
 }
