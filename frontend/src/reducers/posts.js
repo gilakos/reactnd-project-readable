@@ -1,19 +1,27 @@
-import { GET_POST } from '../actions/action_constants'
+//import relevant action constants
+import { LOAD_POSTS, LOAD_POST } from '../actions/action_constants'
 
-const initialState = {
-  post: {}
-}
-
-export default function post (state = initialState, action) {
-  const { post } = action
+const posts = (state = {}, action) => {
+  const { posts, post } = action
 
   switch (action.type) {
-    case GET_POST :
+    case LOAD_POSTS:
       return {
         ...state,
-        post
+        posts
       }
+
+    case LOAD_POST:
+      return state.posts !== undefined
+        ? {
+            ...state,
+            posts: state.posts.map(p => (p.id === post.id ? post : p))
+          }
+        : state
+
     default:
       return state
   }
 }
+
+export default posts

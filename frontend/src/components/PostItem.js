@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
 
-class Post extends Component {
-  render () {
+class PostItem extends Component {
+  render() {
+    const { post } = this.props
+
     return (
       <div>
-        <h3>Post</h3>
+        <div>
+          <h3> {post.title} </h3>
+          <h5> Author: {post.author} </h5>
+          <h6> Category: {post.category} </h6>
+          <p> Posted: {post.timestamp} </p>
+          <p> controls here </p>
+        </div>
+        <hr />
+
+        {/* <h3>Post</h3>
         <ul>
           <li>
             should show the details of a post, including: Title, Body, Author,
@@ -15,10 +26,10 @@ class Post extends Component {
           <li>should have a control to add a new comment.</li>
           <li>implement comment form however you want (inline, modal, etc.)</li>
           <li>comments should also have controls for editing or deleting</li>
-        </ul>
+        </ul> */}
       </div>
     )
   }
 }
 
-export default Post
+export default PostItem

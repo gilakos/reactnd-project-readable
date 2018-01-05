@@ -1,6 +1,6 @@
 //import relevant action constants
 import {
-  RECEIVE_CATEGORIES,
+  LOAD_CATEGORIES,
   CURRENT_CATEGORY,
 } from '../actions/action_constants'
 
@@ -9,7 +9,7 @@ const categories = (state = {}, action) => {
   const { categories, currentCategory } = action
   switch (action.type) {
     //return state and all categories
-    case RECEIVE_CATEGORIES:
+    case LOAD_CATEGORIES:
       return {
         ...state,
         categories

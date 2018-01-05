@@ -26,32 +26,20 @@ export const getCategories = () => {
   )
 }
 
-export const getCategoryPosts = (category) => {
+export const getPosts = (category_filter) => {
+  const conditional_url =
+    category_filter ?
+    `${api}/${category_filter}/posts` :
+    `${api}/posts`
   return(
     fetch(
-      `${api}/${category}/posts`,
+      conditional_url,
       {
         method: 'GET',
         headers: headers,
       }
     ).then(
-      d => d.json()
-    ).catch(error => {
-      return error
-    })
-  )
-}
-
-export const getPosts = () => {
-  return(
-    fetch(
-      `${api}/posts`,
-      {
-        method: 'GET',
-        headers: headers,
-      }
-    ).then(
-      d => d.json()
+      response => response.json()
     ).then(
       data => data
     ).catch(error => {
@@ -77,7 +65,7 @@ export const addPost = (postinfo) => {
   )
 }
 
-export const getPostById = (id) => {
+export const getPost = (id) => {
   return(
     fetch(
       `${api}/posts/${id}`,
@@ -86,7 +74,9 @@ export const getPostById = (id) => {
         headers: headers,
       }
     ).then(
-      (d) => d.json()
+      response => response.json()
+    ).then(
+      data => data
     ).catch(error => {
       return error
     })
