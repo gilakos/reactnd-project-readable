@@ -18,15 +18,6 @@ class CategoryList extends Component {
           <li>should have a control for adding a new post</li>
           <li>DONE: filtered to only include posts with the selected category</li>
         </ul>
-        <div id="catnav">
-          <aside>
-            <ul>
-              <li>category1</li>
-              <li>category2</li>
-              <li>category3</li>
-            </ul>
-          </aside>
-        </div>
       </div>
     )
   }

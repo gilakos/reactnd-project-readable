@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import CommentList from './CommentList'
+import PostComments from './PostComments'
+
 import { fetchPost } from '../actions/post'
+import { fetchPostComments } from '../actions/comments'
+
 import { timestampFormat, fromNow } from '../utils/helpers'
 
 class PostDetail extends Component {
   componentDidMount() {
     const id = this.props.match.params.id || false
     this.props.fetchPost(id)
+    this.props.fetchPostComments(id)
   }
 
   componentDidUpdate(nextProps) {
@@ -15,13 +21,16 @@ class PostDetail extends Component {
     if (nextProps.match.params.id !== this.props.match.params.id) {
       const id = this.props.match.params.id || false
       this.props.fetchPost(id)
+      this.props.fetchPostComments(id)
     }
   }
 
   render() {
-    const { post } = this.props
-    console.log(post)
+    const { post, comments } = this.props
+    const id = this.props.match.params.id || false
+    const postComments = comments[id] || []
 
+    console.log(comments)
     return (
       <div>
         <h3> {post.title} </h3>
@@ -31,17 +40,26 @@ class PostDetail extends Component {
         <hr />
         <p> {post.body} </p>
         <hr />
-        <p> Votes: {post.voteScore} </p>
+        <p>
+          Votes: {post.voteScore} Comments: {post.commentCount}
+        </p>
+        <hr/>
         <p> Controls here </p>
-        <p> Comments here </p>
+        <hr/>
+        {postComments && (
+              <PostComments
+                comments={postComments}
+                onNewComment={this.handleNewComment}
+              />
+            )}
       </div>
     )
   }
 }
 
-const mapStateToProps  = ({ post }) => ({
+const mapStateToProps = ({ post, comments }) => ({
   post: post.post ? post.post : post,
-  //comments
+  comments
 })
 
-export default connect(mapStateToProps, { fetchPost })(PostDetail)
+export default connect(mapStateToProps, { fetchPost, fetchPostComments })(PostDetail)

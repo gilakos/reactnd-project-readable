@@ -133,7 +133,7 @@ export const deletePost = (id) => {
   )
 }
 
-export const getPostCommentsById = (id) => {
+export const getPostComments = (id) => {
   return(
     fetch(
       `${api}/posts/${id}/comments`,
@@ -142,7 +142,9 @@ export const getPostCommentsById = (id) => {
         headers: headers,
       }
     ).then(
-      (d) => d.json()
+      response => response.json()
+    ).then(
+      data => data
     ).catch(error => {
       return error
     })

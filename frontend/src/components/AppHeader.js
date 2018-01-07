@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom'
 import { fetchCategories, currentCategory } from '../actions/categories'
 
 class AppHeader extends Component {
+
+  //fetch categories on update
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
+
   render() {
     const { categories } = this.props.categories
 
@@ -48,9 +54,9 @@ class AppHeader extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, selectedCategory }) => ({
+const mapStateToProps = ({ categories, currentCategory }) => ({
   categories,
-  selectedCategory
+  currentCategory
 })
 
 export default connect(mapStateToProps, { fetchCategories, currentCategory })(

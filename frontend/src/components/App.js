@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { fetchCategories } from '../actions/categories'
-import { fetchPosts } from '../actions/posts'
+// import PropTypes from 'prop-types'
+// import { fetchCategories } from '../actions/categories'
+// import { fetchPosts } from '../actions/posts'
+// import { fetchPostComments } from '../actions/comments'
 
+//import custom components
 import AppHeader from './AppHeader'
 import PostList from './PostList'
 import PostDetail from './PostDetail'
@@ -13,16 +15,6 @@ import PostToDo from './PostToDo'
 import CreateEditPost from './CreateEditPost'
 
 class App extends Component {
-  static propTypes = {
-    getCategories: PropTypes.func.isRequired,
-    getPosts: PropTypes.func.isRequired
-  }
-
-  componentDidMount() {
-    this.props.getCategories()
-    this.props.getPosts()
-  }
-
   render() {
     return (
       <BrowserRouter>
@@ -34,10 +26,10 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={PostList} />
             <Route exact path="/category/:category" component={PostList} />
-            <Route path="/category" component={CategoryList} />
             <Route exact path="/post/:id" component={PostDetail} />
+            <Route exact path="/category" component={CategoryList} />
             <Route exact path="/post" component={PostToDo} />
-            <Route path="/create-edit" component={CreateEditPost} />
+            <Route exact path="/post/create-edit" component={CreateEditPost} />
           </Switch>
           <hr />
 
@@ -54,16 +46,10 @@ class App extends Component {
             </li>
             <li>should have a control for adding a new post</li>
           </ul>
-          <h6> Post List below</h6>
         </div>
       </BrowserRouter>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(fetchCategories()),
-  getPosts: () => dispatch(fetchPosts())
-})
-
-export default connect(null, mapDispatchToProps)(App)
+export default App
