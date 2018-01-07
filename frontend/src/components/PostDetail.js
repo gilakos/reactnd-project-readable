@@ -1,36 +1,53 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import FormSerialize from 'form-serialize'
+import uuid from 'uuid'
 
-import CommentList from './CommentList'
 import PostComments from './PostComments'
 
 import { fetchPost } from '../actions/post'
-import { fetchPostComments } from '../actions/comments'
+import { addNewComment, fetchPostComments } from '../actions/comments'
 
-import { timestampFormat, fromNow } from '../utils/helpers'
+import { fromNow } from '../utils/helpers'
 
 class PostDetail extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id || false
-    this.props.fetchPost(id)
-    this.props.fetchPostComments(id)
+    const postId = this.props.match.params.id || false
+    this.props.fetchPost(postId)
+    this.props.fetchPostComments(postId)
   }
 
   componentDidUpdate(nextProps) {
     // if the category filter changes, request posts again
     if (nextProps.match.params.id !== this.props.match.params.id) {
-      const id = this.props.match.params.id || false
-      this.props.fetchPost(id)
-      this.props.fetchPostComments(id)
+      const postId = this.props.match.params.id || false
+      this.props.fetchPost(postId)
+      this.props.fetchPostComments(postId)
     }
+  }
+
+  handleAddNewComment = event => {
+    event.preventDefault()
+    const postId = this.props.post.id
+    const serializedForm = FormSerialize(event.target, {hash: true})
+    const newCommentId = uuid()
+    //create new comment object
+    const newComment = {
+      //unpack form
+      ...serializedForm,
+      id: newCommentId,
+      parentId: postId,
+      timestamp: new Date().getTime(),
+    }
+    console.log(newComment)
+    this.props.addNewComment(newComment)
   }
 
   render() {
     const { post, comments } = this.props
-    const id = this.props.match.params.id || false
-    const postComments = comments[id] || []
+    const postId = this.props.match.params.id || false
+    const postComments = comments[postId] || []
 
-    console.log(comments)
     return (
       <div>
         <h3> {post.title} </h3>
@@ -43,15 +60,15 @@ class PostDetail extends Component {
         <p>
           Votes: {post.voteScore} Comments: {post.commentCount}
         </p>
-        <hr/>
+        <hr />
         <p> Controls here </p>
-        <hr/>
+        <hr />
         {postComments && (
-              <PostComments
-                comments={postComments}
-                onNewComment={this.handleNewComment}
-              />
-            )}
+          <PostComments
+            comments={postComments}
+            onAddNewComment={this.handleAddNewComment}
+          />
+        )}
       </div>
     )
   }
@@ -62,4 +79,6 @@ const mapStateToProps = ({ post, comments }) => ({
   comments
 })
 
-export default connect(mapStateToProps, { fetchPost, fetchPostComments })(PostDetail)
+export default connect(mapStateToProps, { fetchPost, addNewComment, fetchPostComments })(
+  PostDetail
+)

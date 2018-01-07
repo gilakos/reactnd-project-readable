@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
-// import { fetchCategories } from '../actions/categories'
-// import { fetchPosts } from '../actions/posts'
-// import { fetchPostComments } from '../actions/comments'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 //import custom components
 import AppHeader from './AppHeader'

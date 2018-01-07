@@ -151,17 +151,19 @@ export const getPostComments = (id) => {
   )
 }
 
-export const addComment = (commentinfo) => {
+export const postNewComment = (comment) => {
   return(
     fetch(
       `${api}/comments`,
       {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(commentinfo),
+        body: JSON.stringify(comment),
       }
     ).then(
-      (d) => d.json()
+      response => response.json()
+    ).then(
+      data => data
     ).catch(error => {
       return error
     })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import { timestampFormat, fromNow } from '../utils/helpers'
+import { fromNow } from '../utils/helpers'
 
 class PostItem extends Component {
   render() {

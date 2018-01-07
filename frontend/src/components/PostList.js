@@ -22,7 +22,7 @@ class PostList extends Component {
 
   render() {
     const { posts } = this.props.posts
-    console.log(this.props.match.params.category)
+
     return (
       <div>
         {posts !== undefined && posts.length ? (
