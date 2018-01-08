@@ -42,7 +42,7 @@ class PostCreateEditForm extends Component {
   }
 
   //function to bind cancel action to button
-  cancelPostAdd = event => {
+  cancelPostUpdate= event => {
     event.preventDefault()
     if (this.props.history.action === 'PUSH')
       // when cancelling add post, return to prior page
@@ -123,7 +123,7 @@ class PostCreateEditForm extends Component {
           </div>
         </div>
         <div>
-          <button onClick={this.cancelPostAdd}>Cancel</button>
+          <button onClick={this.cancelPostUpdate}>Cancel</button>
           <button disabled={!this.state.category}>Save Post</button>
         </div>
       </form>

@@ -13,7 +13,5 @@ export const CURRENT_CATEGORY = 'CURRENT_CATEGORY'
 //comment actions
 export const LOAD_COMMENT = 'LOAD_COMMENT' //load a comment
 export const LOAD_POST_COMMENTS = 'LOAD_POST_COMMENTS' //load comments by post
-export const ADD_COMMENT = 'ADD_COMMENT' //add comment
-export const VOTE_COMMENT = 'VOTE_COMMENT' //vote comment
-export const EDIT_COMMENT = 'EDIT_COMMENT' //edit comment
 export const DELETE_COMMENT = 'DELETE_COMMENT' //delete comment
+export const VOTE_COMMENT = 'VOTE_COMMENT' //vote comment

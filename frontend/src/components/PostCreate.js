@@ -36,7 +36,7 @@ class PostCreate extends Component {
         <h3>Create / Edit</h3>
         <ul>
           <li>DONE: should have a form to create new post or edit existing posts</li>
-          <li>when editing, existing data should be populated in the form</li>
+          <li>DONE: when editing, existing data should be populated in the form</li>
         </ul>
       </div>
     )

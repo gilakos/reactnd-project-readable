@@ -72,27 +72,29 @@ export const putUpdatePost = post => {
     })
 }
 
+export const deletePost = id => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    return error
+  })
+}
+
 export const votePost = (id, vote) => {
   return fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(vote)
   })
-    .then(d => d.json())
-    .catch(error => {
-      return error
-    })
-}
-
-export const deletePost = id => {
-  return fetch(`${api}/posts/${id}`, {
-    method: 'DELETE',
-    headers: headers
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    return error
   })
-    .then(d => d.json())
-    .catch(error => {
-      return error
-    })
 }
 
 export const getPostComments = id => {
@@ -120,37 +122,40 @@ export const postNewComment = comment => {
     })
 }
 
+export const deleteComment = id => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    return error
+  })
+}
+
+export const putUpdateComment = comment => {
+  return fetch(`${api}/comments/${comment.id}`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(comment)
+  })
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    return error
+  })
+}
+
 export const voteComment = (id, vote) => {
   return fetch(`${api}/comments/${id}`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(vote)
   })
-    .then(d => d.json())
-    .catch(error => {
-      return error
-    })
-}
-
-export const editComment = (id, commentinfo) => {
-  return fetch(`${api}/comments/${id}`, {
-    method: 'PUT',
-    headers: headers,
-    body: JSON.stringify(commentinfo)
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => {
+    return error
   })
-    .then(d => d.json())
-    .catch(error => {
-      return error
-    })
-}
-
-export const deleteComment = id => {
-  return fetch(`${api}/comments/${id}`, {
-    method: 'DELETE',
-    headers: headers
-  })
-    .then(d => d.json())
-    .catch(error => {
-      return error
-    })
 }

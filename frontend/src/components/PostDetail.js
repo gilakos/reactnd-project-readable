@@ -40,7 +40,6 @@ class PostDetail extends Component {
       parentId: postId,
       timestamp: new Date().getTime(),
     }
-    console.log(newComment)
     this.props.addNewComment(newComment)
   }
 

@@ -2,7 +2,8 @@
 import {
   LOAD_COMMENT,
   LOAD_POST_COMMENTS,
-} from '../actions/action_constants'
+  DELETE_COMMENT
+ } from '../actions/action_constants'
 
 //define comment reducer
 const comments = (state = {}, action) => {
@@ -16,14 +17,25 @@ const comments = (state = {}, action) => {
       }
 
     case LOAD_COMMENT:
-      const existingComment = state[comment.parentId].filter( c => c.id === comment.id ).length;
+      const existingComment = state[comment.parentId].filter(
+        c => c.id === comment.id
+      ).length
       return {
         ...state,
-        [comment.parentId]: existingComment ?
-          state[comment.parentId].map( c => c.id === comment.id ? comment : c)
+        [comment.parentId]: existingComment
+          ? state[comment.parentId].map(
+              c => (c.id === comment.id ? comment : c)
+            )
           : state[comment.parentId].concat(comment)
       }
 
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        [comment.parentId]: state[comment.parentId].filter(
+          c => c.id !== comment.id
+        )
+      }
     default:
       return state
   }

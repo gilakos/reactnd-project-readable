@@ -23,20 +23,19 @@ class PostEdit extends Component {
     event.preventDefault()
     const serializedForm = FormSerialize(event.target, { hash: true })
     //create new post object
-    const post = {
+    const updatedPost = {
       //unpack form
       ...this.props.post,
       ...serializedForm,
       timestamp: new Date().getTime(),
     }
-    this.props.updatePost(post).then(({ p }) => {
-      this.props.history.push(`/post/${post.id}`)
+    this.props.updatePost(updatedPost).then(({ p }) => {
+      this.props.history.push(`/post/${updatedPost.id}`)
     })
   }
 
   render() {
     const { post } = this.props
-    //console.log(this.props.post)
 
     return (
       <div>
