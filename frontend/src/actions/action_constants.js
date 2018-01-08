@@ -2,7 +2,7 @@
 export const LOAD_POSTS = 'LOAD_POSTS' //get all posts
 export const LOAD_POST = 'LOAD_POST' //get post
 export const LOAD_NEW_POST = 'LOAD_NEW_POST' //add post
-export const EDIT_POST = 'EDIT_POST' //edit post
+export const UPDATE_POST = 'UPDATE_POST' //edit post
 export const DELETE_POST = 'DELETE_POST' //delete post
 export const VOTE_POST = 'VOTE_POST' //vote post
 

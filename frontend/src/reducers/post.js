@@ -1,7 +1,6 @@
 //import relevant action constants
 import {
   LOAD_POST,
-  // EDIT_POST,
   DELETE_POST,
 } from '../actions/action_constants'
 

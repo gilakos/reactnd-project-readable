@@ -8,6 +8,7 @@ import PostDetail from './PostDetail'
 import CategoryList from './CategoryList'
 import PostToDo from './PostToDo'
 import PostCreate from './PostCreate'
+import PostEdit from './PostEdit'
 
 class App extends Component {
   render() {
@@ -19,11 +20,12 @@ class App extends Component {
           <hr />
           <Switch>
             <Route exact path="/" component={PostList} />
+            <Route exact path="/category" component={CategoryList} />
             <Route exact path="/category/:category" component={PostList} />
             <Route exact path="/post/:id" component={PostDetail} />
-            <Route exact path="/category" component={CategoryList} />
-            <Route exact path="/post" component={PostToDo} />
+            <Route exact path="/edit/:id" component={PostEdit} />
             <Route exact path="/create" component={PostCreate} />
+            <Route exact path="/post" component={PostToDo} />
           </Switch>
           <hr />
 

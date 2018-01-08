@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class PostCreateEditForm extends Component {
-  //define state of form
+  //define state of form (from post data)
   state = {
     author: '',
     title: '',
@@ -12,27 +12,27 @@ class PostCreateEditForm extends Component {
   }
 
   // on mount
-  // componentDidMount() {
-  //   if( this.props.post !== undefined ) {
-  //     this.setState({
-  //       author: this.props.post.author,
-  //       title: this.props.post.title,
-  //       body: this.props.post.body,
-  //       category: this.props.post.category
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.post !== undefined) {
+      this.setState({
+        author: this.props.post.author,
+        title: this.props.post.title,
+        body: this.props.post.body,
+        category: this.props.post.category
+      })
+    }
+  }
 
-  // componentDidUpdate(nextProps) {
-  //   if( nextProps.post !== undefined ) {
-  //     this.setState({
-  //       author: nextProps.post.author,
-  //       title: nextProps.post.title,
-  //       body: nextProps.post.body,
-  //       category: nextProps.post.category
-  //     });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.post !== undefined) {
+      this.setState({
+        author: nextProps.post.author,
+        title: nextProps.post.title,
+        body: nextProps.post.body,
+        category: nextProps.post.category
+      })
+    }
+  }
 
   //function to bind category button to state
   selectCategory = event => {
@@ -47,7 +47,9 @@ class PostCreateEditForm extends Component {
     if (this.props.history.action === 'PUSH')
       // when cancelling add post, return to prior page
       this.props.history.goBack()
-    else this.props.history.push('/')
+    else
+      //send home
+      this.props.history.push('/')
   }
 
   //handle changes to each form field
@@ -85,7 +87,7 @@ class PostCreateEditForm extends Component {
               type="text"
               name="title"
               value={this.state.title}
-              placeholder="The next big thing is..."
+              placeholder="Post title*"
               onChange={event => this.handleInputChange(event)}
               required
             />
@@ -96,7 +98,7 @@ class PostCreateEditForm extends Component {
               name="body"
               rows="3"
               value={this.state.body}
-              placeholder="lorem ipsum..."
+              placeholder="Your post text*"
               onChange={event => this.handleInputChange(event)}
               required
             />
@@ -107,10 +109,7 @@ class PostCreateEditForm extends Component {
               <div data-toggle="buttons">
                 {categories !== undefined &&
                   categories.map(category => (
-                    <label
-                      key={category.path}
-                      onClick={this.selectCategory}
-                    >
+                    <label key={category.path} onClick={this.selectCategory}>
                       <input
                         type="radio"
                         name="category"
@@ -124,16 +123,8 @@ class PostCreateEditForm extends Component {
           </div>
         </div>
         <div>
-          <button
-            onClick={this.cancelPostAdd}
-          >
-            Cancel
-          </button>
-          <button
-            disabled={!this.state.category}
-          >
-            Save Post
-          </button>
+          <button onClick={this.cancelPostAdd}>Cancel</button>
+          <button disabled={!this.state.category}>Save Post</button>
         </div>
       </form>
     )

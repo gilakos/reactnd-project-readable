@@ -2,7 +2,7 @@
 import {
   LOAD_POSTS,
   LOAD_POST,
-  LOAD_NEW_POST,
+  LOAD_NEW_POST
 } from '../actions/action_constants'
 
 const posts = (state = {}, action) => {

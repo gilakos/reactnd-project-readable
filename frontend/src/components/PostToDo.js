@@ -11,7 +11,7 @@ class PostToDo extends Component {
             timestamp (in user readable format), and vote score
           </li>
           <li>DONE: should list all of the comments for that post</li>
-          <li>should have controls to edit or delete the post</li>
+          <li>DONE: should have controls to edit or delete the post</li>
           <li>DONE: should have a control to add a new comment.</li>
           <li>DONE: implement comment form however you want (inline, modal, etc.)</li>
           <li>comments should also have controls for editing or deleting</li>
