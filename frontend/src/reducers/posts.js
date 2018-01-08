@@ -1,5 +1,9 @@
 //import relevant action constants
-import { LOAD_POSTS, LOAD_POST } from '../actions/action_constants'
+import {
+  LOAD_POSTS,
+  LOAD_POST,
+  LOAD_NEW_POST,
+} from '../actions/action_constants'
 
 const posts = (state = {}, action) => {
   const { posts, post } = action
@@ -9,6 +13,12 @@ const posts = (state = {}, action) => {
       return {
         ...state,
         posts
+      }
+
+    case LOAD_NEW_POST:
+      return {
+        ...state,
+        posts: state.posts.concat(post)
       }
 
     case LOAD_POST:

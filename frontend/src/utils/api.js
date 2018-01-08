@@ -48,17 +48,19 @@ export const getPosts = (category_filter) => {
   )
 }
 
-export const addPost = (postinfo) => {
+export const postNewPost = (post) => {
   return(
     fetch(
       `${api}/posts`,
       {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(postinfo),
+        body: JSON.stringify(post),
       }
     ).then(
-      (d) => d.json()
+      response => response.json()
+    ).then(
+      data => data
     ).catch(error => {
       return error
     })

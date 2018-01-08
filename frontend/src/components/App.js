@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter  } from 'react-router-dom'
 
 //import custom components
 import AppHeader from './AppHeader'
@@ -7,12 +7,11 @@ import PostList from './PostList'
 import PostDetail from './PostDetail'
 import CategoryList from './CategoryList'
 import PostToDo from './PostToDo'
-import CreateEditPost from './CreateEditPost'
+import PostCreate from './PostCreate'
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
         <div>
           <Switch>
             <Route path="/" component={AppHeader} />
@@ -24,7 +23,7 @@ class App extends Component {
             <Route exact path="/post/:id" component={PostDetail} />
             <Route exact path="/category" component={CategoryList} />
             <Route exact path="/post" component={PostToDo} />
-            <Route exact path="/post/create-edit" component={CreateEditPost} />
+            <Route exact path="/create" component={PostCreate} />
           </Switch>
           <hr />
 
@@ -39,12 +38,11 @@ class App extends Component {
               should have a control for changing the sort method for the list,
               including at minimum, order by voteScore and order by timestamp
             </li>
-            <li>should have a control for adding a new post</li>
+            <li>DONE: should have a control for adding a new post</li>
           </ul>
         </div>
-      </BrowserRouter>
     )
   }
 }
 
-export default App
+export default withRouter(App)

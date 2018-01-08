@@ -25,7 +25,6 @@ class AppHeader extends Component {
               category => (
                 <li
                   key={category.path}
-
                 >
                   <Link
                     to={`/category/${category.path}`}
@@ -35,6 +34,13 @@ class AppHeader extends Component {
                 </li>
               )
             )}
+            <li>
+              <Link
+                to='/create'
+                >
+                  Add Post
+                </Link>
+            </li>
           </ul>
         </div>
         <h6>ToDo</h6>
@@ -46,7 +52,7 @@ class AppHeader extends Component {
             <Link to="/post">Post</Link>
           </li>
           <li>
-            <Link to="/create-edit">Create / Edit</Link>
+            <Link to="/create">Create / Edit</Link>
           </li>
         </ul>
       </nav>

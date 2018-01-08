@@ -4,6 +4,7 @@ import FormSerialize from 'form-serialize'
 import uuid from 'uuid'
 
 import PostComments from './PostComments'
+import PostControls from './PostControls'
 
 import { fetchPost } from '../actions/post'
 import { addNewComment, fetchPostComments } from '../actions/comments'
@@ -44,7 +45,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { post, comments } = this.props
+    const { post, comments, history } = this.props
     const postId = this.props.match.params.id || false
     const postComments = comments[postId] || []
 
@@ -62,6 +63,10 @@ class PostDetail extends Component {
         </p>
         <hr />
         <p> Controls here </p>
+        <PostControls
+          post={post}
+          history={history}
+        />
         <hr />
         {postComments && (
           <PostComments

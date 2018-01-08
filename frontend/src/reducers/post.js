@@ -1,9 +1,8 @@
 //import relevant action constants
 import {
   LOAD_POST,
-  // ADD_POST,
   // EDIT_POST,
-  // DELETE_POST,
+  DELETE_POST,
 } from '../actions/action_constants'
 
 const post = (state = {}, action) => {
@@ -13,6 +12,12 @@ const post = (state = {}, action) => {
       return {
         ...state,
         post
+      }
+
+    case DELETE_POST:
+      return {
+        ...state,
+        post: undefined
       }
 
     default:

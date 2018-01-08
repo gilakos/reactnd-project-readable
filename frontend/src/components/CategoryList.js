@@ -15,7 +15,7 @@ class CategoryList extends Component {
             should have a control for changing the sort method for the list,
             including at minimum, order by voteScore and order by timestamp
           </li>
-          <li>should have a control for adding a new post</li>
+          <li>DONE: should have a control for adding a new post</li>
           <li>DONE: filtered to only include posts with the selected category</li>
         </ul>
       </div>
