@@ -16,3 +16,6 @@ export const DELETE_COMMENT = 'DELETE_COMMENT' //delete comment
 
 //vote actions
 export const LOAD_VOTE = 'LOAD_VOTE' //vote post or comment
+
+//sort actions
+export const SET_SORT = 'SET_SORT' //set sorting
