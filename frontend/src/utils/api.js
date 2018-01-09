@@ -84,18 +84,7 @@ export const deletePost = id => {
   })
 }
 
-export const votePost = (id, vote) => {
-  return fetch(`${api}/posts/${id}`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(vote)
-  })
-  .then(response => response.json())
-  .then(data => data)
-  .catch(error => {
-    return error
-  })
-}
+
 
 export const getPostComments = id => {
   return fetch(`${api}/posts/${id}/comments`, {
@@ -147,11 +136,14 @@ export const putUpdateComment = comment => {
   })
 }
 
-export const voteComment = (id, vote) => {
-  return fetch(`${api}/comments/${id}`, {
+export const postVote = (objectType, id, vote) => {
+  //objectType: [String]: Either "posts" or "comments"
+  //id: [String]: post or comment id
+  //vote: [String]: Either "upVote" or "downVote"
+  return fetch(`${api}/${objectType}/${id}`, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify(vote)
+    body: JSON.stringify({ id: id, option: vote })
   })
   .then(response => response.json())
   .then(data => data)

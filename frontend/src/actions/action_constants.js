@@ -4,7 +4,6 @@ export const LOAD_POST = 'LOAD_POST' //get post
 export const LOAD_NEW_POST = 'LOAD_NEW_POST' //add post
 export const UPDATE_POST = 'UPDATE_POST' //edit post
 export const DELETE_POST = 'DELETE_POST' //delete post
-export const VOTE_POST = 'VOTE_POST' //vote post
 
 //category actions
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
@@ -14,4 +13,6 @@ export const CURRENT_CATEGORY = 'CURRENT_CATEGORY'
 export const LOAD_COMMENT = 'LOAD_COMMENT' //load a comment
 export const LOAD_POST_COMMENTS = 'LOAD_POST_COMMENTS' //load comments by post
 export const DELETE_COMMENT = 'DELETE_COMMENT' //delete comment
-export const VOTE_COMMENT = 'VOTE_COMMENT' //vote comment
+
+//vote actions
+export const LOAD_VOTE = 'LOAD_VOTE' //vote post or comment

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { removeComment } from '../actions/comments'
+import VoteControls from './VoteControls'
 
 class CommentControls extends Component {
 
@@ -18,11 +19,12 @@ class CommentControls extends Component {
 
   render() {
     //get post from props
-    const { post } = this.props
+    const { comment } = this.props
 
     return (
       <div>
         <div>
+          <VoteControls entry={ comment } />
           <button
             onClick={() => {
               this.handleEditComment()
@@ -47,4 +49,4 @@ const mapStateToProps = ({ categories }) => ({
   categories
 })
 
-export default withRouter(connect(null, { removeComment })(CommentControls))
+export default withRouter(connect(mapStateToProps, { removeComment })(CommentControls))

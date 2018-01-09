@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import PostControls from './PostControls'
+
 import { fromNow } from '../utils/helpers'
 
 class PostItem extends Component {
@@ -15,7 +17,7 @@ class PostItem extends Component {
         <h5> Author: {post.author} </h5>
         <h6> Category: {post.category} </h6>
         <time> Posted: {fromNow(post.timestamp)} </time>
-        <p> controls here </p>
+        <PostControls post={post}/>
       </div>
     )
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { removePost } from '../actions/post'
+import VoteControls from './VoteControls'
 
 class PostControls extends Component {
 
@@ -33,6 +34,7 @@ class PostControls extends Component {
     return (
       <div>
         <div>
+          <VoteControls entry={ post } />
           <button
             onClick={() => {
               this.handleEditPost()
