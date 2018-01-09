@@ -3,14 +3,19 @@ import { connect } from 'react-redux'
 import FormSerialize from 'form-serialize'
 import uuid from 'uuid'
 
-import { addNewPost } from '../actions/post'
+//import custom components
 import PostCreateEditForm from './PostCreateEditForm'
 
-class PostCreate extends Component {
+//import actions for post
+import { addNewPost } from '../actions/post'
 
+class PostCreate extends Component {
+  //handle post creation event
   handlePostSubmit = ( event ) => {
     event.preventDefault()
+    //serialize text from form
     const serializedForm = FormSerialize(event.target, {hash: true})
+    //create a new unique id for the post
     const newPostId = uuid()
     //create new post object
     const newPost = {
@@ -19,7 +24,9 @@ class PostCreate extends Component {
       id: newPostId,
       timestamp: new Date().getTime(),
     }
+    //add new post action
     this.props.addNewPost( newPost ).then( ({ p }) => {
+      //send to newly created post page
       this.props.history.push(`/post/${newPost.id}`);
     })
   }
@@ -33,14 +40,14 @@ class PostCreate extends Component {
             onFormSubmit={this.handlePostSubmit}
           />
         </div>
-        <h3>Create / Edit</h3>
-        <ul>
-          <li>DONE: should have a form to create new post or edit existing posts</li>
-          <li>DONE: when editing, existing data should be populated in the form</li>
-        </ul>
       </div>
     )
   }
 }
 
-export default connect(null, { addNewPost })(PostCreate)
+//inject functions into component props
+const mapDispatchToProps = {
+  addNewPost
+}
+
+export default connect(null, mapDispatchToProps)(PostCreate)

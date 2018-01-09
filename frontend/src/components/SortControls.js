@@ -1,20 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+//import actions for sort
 import { defineSort } from '../actions/sort'
 
 class SortControls extends Component {
+  //define default sorting properties on mount
   componentDidMount() {
     this.props.defineSort('date', 'ascending')
   }
 
+  //handle sort click event
   handleSortClick = (criteria, sort) => {
-    console.log(sort)
+    //define sort action with toggle sorting order after click
     this.props.defineSort(criteria, sort === 'ascending' ? 'descending' : 'ascending')
   }
 
   render() {
+    //extract sort from props
     const { sort } = this.props
+
     return (
       <div>
         {sort.orderby && (
@@ -41,8 +46,15 @@ class SortControls extends Component {
     )
   }
 }
+
+//subscribe component state to Redux store updates
 const mapStateToProps = ({ sort }) => ({
   sort
 })
 
-export default connect(mapStateToProps, {defineSort})(SortControls)
+//inject functions into component props
+const mapDispatchToProps = {
+  defineSort
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortControls)

@@ -13,7 +13,7 @@ const categories = (state = {}, action) => {
       return {
         ...state,
         categories
-      };
+      }
     //return state and current category
     case CURRENT_CATEGORY:
       return {
@@ -22,7 +22,7 @@ const categories = (state = {}, action) => {
       }
     //default: return state
     default:
-      return state;
+      return state
   }
 }
 

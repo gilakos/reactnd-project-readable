@@ -2,43 +2,56 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FormSerialize from 'form-serialize'
 
+//import custom components
 import CommentControls from './CommentControls'
+
+//import actions for comments
 import { updateComment } from '../actions/comments'
 
 class CommentItem extends Component {
+  //define state for if user is editing the comment
   state = {
     userEditing: false
   }
 
+  //handle edit comment state change
   editComment = () => {
     this.setState({
       userEditing: true
     })
   }
 
+  //handle update comment event
   handleCommentUpdate = ( event ) => {
     event.preventDefault();
+    //serialize text from form
     const serializedForm = FormSerialize(event.target, {hash: true});
-    //create new comment object
+    //create updated comment object
     const updatedComment = {
       ...this.props.comment,
+      //unpack form
       ...serializedForm
-    };
+    }
+    //update comment action
     this.props.updateComment(updatedComment).then( data => {
+      //reset the editing state
       this.setState({
         userEditing: false
       })
-    });
+    })
   }
 
+  //handle cancel update event
   cancelCommentUpdate = ( event ) => {
     event.preventDefault()
+    //reset the editing state
     this.setState({
       userEditing: false
     })
   }
 
   render() {
+    //extract comment from props
     const { comment } = this.props
 
     return (
@@ -84,8 +97,14 @@ class CommentItem extends Component {
   }
 }
 
+//subscribe component state to Redux store updates
 const mapStateToProps  = ({ userEditing }) => ({
   userEditing
 })
 
-export default connect(mapStateToProps, { updateComment })(CommentItem)
+//inject functions into component props
+const mapDispatchToProps = {
+  updateComment
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentItem)

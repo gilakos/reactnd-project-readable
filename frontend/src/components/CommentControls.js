@@ -2,23 +2,26 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { removeComment } from '../actions/comments'
+//import custom components
 import VoteControls from './VoteControls'
 
-class CommentControls extends Component {
+//import actions for comments
+import { removeComment } from '../actions/comments'
 
+class CommentControls extends Component {
+  //handle edit comment click event
   handleEditComment = () => {
-    //send click to props
     this.props.handleEditClick()
   }
 
+  //handle delete comment click event
   handleDeleteComment = () => {
-    //remove the comment action
+    //remove comment action
     this.props.removeComment(this.props.comment)
   }
 
   render() {
-    //get post from props
+    //extract comment from props
     const { comment } = this.props
 
     return (
@@ -45,8 +48,14 @@ class CommentControls extends Component {
   }
 }
 
+//subscribe component state to Redux store updates
 const mapStateToProps = ({ categories }) => ({
   categories
 })
 
-export default withRouter(connect(mapStateToProps, { removeComment })(CommentControls))
+//inject functions into component props
+const mapDispatchToProps = {
+  removeComment
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentControls))

@@ -4,8 +4,6 @@ import * as Api from '../utils/api'
 import {
   LOAD_POST,
   LOAD_NEW_POST,
-  // ADD_POST,
-  // UPDATE_POST,
   DELETE_POST
 } from './action_constants'
 
@@ -27,11 +25,6 @@ export const loadNewPost = post => ({
 export const addNewPost = post => dispatch =>
   Api.postNewPost(post).then(post => dispatch(loadNewPost(post)))
 
-// export const loadUpdatedPost = post => ({
-//   type: UPDATE_POST,
-//   post
-// })
-
 //update existing post
 export const updatePost = post => dispatch =>
   Api.putUpdatePost(post).then(data => dispatch(loadPost(data)))
@@ -41,5 +34,6 @@ export const deletePost = post => ({
   post
 })
 
+//remove post on server
 export const removePost = post => dispatch =>
   Api.deletePost(post.id).then(dispatch(deletePost(post)))

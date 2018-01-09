@@ -6,13 +6,14 @@ import {
 const sort = (state = {}, action) => {
   const { orderby, sort } = action
   switch (action.type) {
+    //return state and sort details
     case SET_SORT:
       return {
         ...state,
         orderby,
         sort
       }
-
+    //default: return state
     default:
       return state
   }

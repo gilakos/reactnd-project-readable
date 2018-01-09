@@ -7,6 +7,8 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
+//CATEGORIES
+//GET categories
 export const getCategories = () => {
   return fetch(`${api}/categories`, {
     method: 'GET',
@@ -19,6 +21,8 @@ export const getCategories = () => {
     })
 }
 
+//POSTS
+//GET all posts
 export const getPosts = category_filter => {
   const conditional_url = category_filter
     ? `${api}/${category_filter}/posts`
@@ -34,6 +38,7 @@ export const getPosts = category_filter => {
     })
 }
 
+//GET post by id
 export const getPost = id => {
   return fetch(`${api}/posts/${id}`, {
     method: 'GET',
@@ -46,6 +51,7 @@ export const getPost = id => {
     })
 }
 
+//POST add new post
 export const postNewPost = post => {
   return fetch(`${api}/posts`, {
     method: 'POST',
@@ -59,6 +65,7 @@ export const postNewPost = post => {
     })
 }
 
+//PUT update post
 export const putUpdatePost = post => {
   return fetch(`${api}/posts/${post.id}`, {
     method: 'PUT',
@@ -72,20 +79,21 @@ export const putUpdatePost = post => {
     })
 }
 
+//DELETE post
 export const deletePost = id => {
   return fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
     headers: headers
   })
-  .then(response => response.json())
-  .then(data => data)
-  .catch(error => {
-    return error
-  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => {
+      return error
+    })
 }
 
-
-
+//COMMENTS
+//GET comments by post id
 export const getPostComments = id => {
   return fetch(`${api}/posts/${id}/comments`, {
     method: 'GET',
@@ -98,6 +106,7 @@ export const getPostComments = id => {
     })
 }
 
+//POST new comment
 export const postNewComment = comment => {
   return fetch(`${api}/comments`, {
     method: 'POST',
@@ -111,31 +120,35 @@ export const postNewComment = comment => {
     })
 }
 
-export const deleteComment = id => {
-  return fetch(`${api}/comments/${id}`, {
-    method: 'DELETE',
-    headers: headers
-  })
-  .then(response => response.json())
-  .then(data => data)
-  .catch(error => {
-    return error
-  })
-}
-
+//PUT update comment
 export const putUpdateComment = comment => {
   return fetch(`${api}/comments/${comment.id}`, {
     method: 'PUT',
     headers: headers,
     body: JSON.stringify(comment)
   })
-  .then(response => response.json())
-  .then(data => data)
-  .catch(error => {
-    return error
-  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => {
+      return error
+    })
 }
 
+//DELETE comment
+export const deleteComment = id => {
+  return fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => {
+      return error
+    })
+}
+
+//VOTES
+//POST vote function
 export const postVote = (objectType, id, vote) => {
   //objectType: [String]: Either "posts" or "comments"
   //id: [String]: post or comment id
@@ -145,9 +158,9 @@ export const postVote = (objectType, id, vote) => {
     headers: headers,
     body: JSON.stringify({ id: id, option: vote })
   })
-  .then(response => response.json())
-  .then(data => data)
-  .catch(error => {
-    return error
-  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => {
+      return error
+    })
 }

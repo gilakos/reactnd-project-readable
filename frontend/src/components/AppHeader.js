@@ -7,12 +7,13 @@ import { fetchCategories, currentCategory } from '../actions/categories'
 
 class AppHeader extends Component {
 
-  //fetch categories on update
+  //fetch categories on mount
   componentDidMount() {
     this.props.fetchCategories();
   }
 
   render() {
+    //extract categories from props
     const { categories } = this.props.categories
 
     return (
@@ -43,28 +44,24 @@ class AppHeader extends Component {
             </li>
           </ul>
         </div>
-        <h6>ToDo</h6>
-        <ul>
-          <li>
-            <Link to="/category">Category</Link>
-          </li>
-          <li>
-            <Link to="/post">Post</Link>
-          </li>
-          <li>
-            <Link to="/create">Create / Edit</Link>
-          </li>
-        </ul>
       </nav>
     )
   }
 }
 
+//subscribe component state to Redux store updates
 const mapStateToProps = ({ categories, currentCategory }) => ({
   categories,
   currentCategory
 })
 
-export default connect(mapStateToProps, { fetchCategories, currentCategory })(
+//inject functions into component props
+const mapDispatchToProps = {
+  fetchCategories,
+  currentCategory
+}
+
+//connect component to Redux store
+export default connect(mapStateToProps, mapDispatchToProps)(
   AppHeader
 )

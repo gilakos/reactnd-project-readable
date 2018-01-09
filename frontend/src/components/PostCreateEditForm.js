@@ -11,7 +11,8 @@ class PostCreateEditForm extends Component {
     category: ''
   }
 
-  // on mount
+  //set state on mount
+  //if editing existing post, otherwise leave empty
   componentDidMount() {
     if (this.props.post !== undefined) {
       this.setState({
@@ -23,6 +24,8 @@ class PostCreateEditForm extends Component {
     }
   }
 
+  //set state on component receiving new nextProps
+  //if editing existing post, otherwise leave empty
   componentWillReceiveProps(nextProps) {
     if (nextProps.post !== undefined) {
       this.setState({
@@ -34,14 +37,14 @@ class PostCreateEditForm extends Component {
     }
   }
 
-  //function to bind category button to state
+  //handle selection of category from radio button
   selectCategory = event => {
     this.setState({
       category: event.target.value
     })
   }
 
-  //function to bind cancel action to button
+  //handle cancel post creation event
   cancelPostUpdate= event => {
     event.preventDefault()
     if (this.props.history.action === 'PUSH')
@@ -52,7 +55,7 @@ class PostCreateEditForm extends Component {
       this.props.history.push('/')
   }
 
-  //handle changes to each form field
+  //handle changes events for each form field
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -60,7 +63,7 @@ class PostCreateEditForm extends Component {
   }
 
   render() {
-    //get form submit action, header, categories from props
+    //extract form submit action, header, categories from props
     const { onFormSubmit, formHeader } = this.props
     const { categories } = this.props.categories
 
@@ -131,6 +134,7 @@ class PostCreateEditForm extends Component {
   }
 }
 
+//subscribe component state to Redux store updates
 const mapStateToProps = ({ categories }) => ({
   categories
 })

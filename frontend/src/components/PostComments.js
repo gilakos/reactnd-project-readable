@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
+
+//import custom components
 import CommentItem from './CommentItem'
 
 class PostComments extends Component {
-  //handle form submission event for new comment
+  //handle form submission event
   handleCommentSubmit = event => {
     event.preventDefault()
+    //send event to props function to add new comment
     this.props.onAddNewComment(event)
+    //reset the comment form when done
     this.commentForm.reset()
   }
 
   render() {
+    //extract comment from props
     const { comments } = this.props
 
     return (
@@ -21,9 +26,7 @@ class PostComments extends Component {
         </div>
         <ul>
           {comments.map(comment => (
-            <CommentItem
-              key={comment.id}
-              comment={comment} />
+            <CommentItem key={comment.id} comment={comment} />
           ))}
           <li>
             <h6>

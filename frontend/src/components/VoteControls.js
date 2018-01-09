@@ -1,27 +1,31 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
+//import actions for vote
 import { submitVote } from '../actions/vote'
 
 class VoteControls extends Component {
+  //define proptypes
+  //this component can take either post or comment as object to vote on
   static propTypes = {
     entry: PropTypes.object
   }
 
+  //handle vote event
   handleVote = (entry, voteOption) => {
-    //handle vote with options
     //define entry type based on if it has a parentId (post) or not (comment)
     const entryType = entry.hasOwnProperty('parentId') ? 'comments' : 'posts'
+    //submit vote action
     this.props.submitVote(entryType, entry.id, voteOption)
   }
 
   render() {
-    //get post or comment and vote from props
+    //extract post or comment and vote from props
     const { entry, vote } = this.props
-    let voteTally = (vote[entry.id] === undefined) ? entry.voteScore : vote[entry.id]
-
+    //get the tally of votes for this entry
+    let voteTally =
+      vote[entry.id] === undefined ? entry.voteScore : vote[entry.id]
 
     return (
       <div>
@@ -47,8 +51,14 @@ class VoteControls extends Component {
   }
 }
 
+//subscribe component state to Redux store updates
 const mapStateToProps = ({ vote }) => ({
   vote
 })
 
-export default withRouter(connect(mapStateToProps, { submitVote })(VoteControls))
+//inject functions into component props
+const mapDispatchToProps = {
+  submitVote
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(VoteControls)
