@@ -5,6 +5,15 @@ import { connect } from 'react-redux'
 //import actions for vote
 import { submitVote } from '../actions/vote'
 
+import '../css/index.css'
+import '../css/bootstrap-grid.css'
+import '../css/bootstrap-reboot.css'
+import '../css/bootstrap.css'
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faThumbsDown from '@fortawesome/fontawesome-free-solid/faThumbsDown'
+import faThumbsUp from '@fortawesome/fontawesome-free-solid/faThumbsUp'
+
 class VoteControls extends Component {
   //define proptypes
   //this component can take either post or comment as object to vote on
@@ -28,24 +37,20 @@ class VoteControls extends Component {
       vote[entry.id] === undefined ? entry.voteScore : vote[entry.id]
 
     return (
-      <div>
-        <div>
-          <button
-            onClick={() => {
-              this.handleVote(entry, 'upVote')
-            }}
-          >
-            Up Vote
-          </button>
-          <span>{voteTally}</span>
-          <button
-            onClick={() => {
-              this.handleVote(entry, 'downVote')
-            }}
-          >
-            Down Vote
-          </button>
-        </div>
+      <div className="comments">
+        <FontAwesomeIcon
+          icon={faThumbsUp}
+          onClick={() => {
+            this.handleVote(entry, 'upVote')
+          }}
+        />{' '}
+        {voteTally}{' '}
+        <FontAwesomeIcon
+          icon={faThumbsDown}
+          onClick={() => {
+            this.handleVote(entry, 'downVote')
+          }}
+        />
       </div>
     )
   }

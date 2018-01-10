@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+//import helper function
+import { capitalizeFirst } from '../utils/helpers'
+
+//import styles
+import '../css/index.css'
+import '../css/bootstrap-grid.css'
+import '../css/bootstrap-reboot.css'
+import '../css/bootstrap.css'
+
 class PostCreateEditForm extends Component {
   //define state of form (from post data)
   state = {
@@ -45,7 +54,7 @@ class PostCreateEditForm extends Component {
   }
 
   //handle cancel post creation event
-  cancelPostUpdate= event => {
+  cancelPostUpdate = event => {
     event.preventDefault()
     if (this.props.history.action === 'PUSH')
       // when cancelling add post, return to prior page
@@ -68,68 +77,99 @@ class PostCreateEditForm extends Component {
     const { categories } = this.props.categories
 
     return (
-      <form onSubmit={onFormSubmit}>
-        <div>
-          <h4>{formHeader}</h4>
-        </div>
-        <div>
-          <div>
-            <label>Name</label>
-            <input
-              type="text"
-              name="author"
-              placeholder="Your name*"
-              value={this.state.author}
-              onChange={event => this.handleInputChange(event)}
-              required
-            />
-          </div>
-          <div>
-            <label>Post Title</label>
-            <input
-              type="text"
-              name="title"
-              value={this.state.title}
-              placeholder="Post title*"
-              onChange={event => this.handleInputChange(event)}
-              required
-            />
-          </div>
-          <div>
-            <label>Content</label>
-            <textarea
-              name="body"
-              rows="3"
-              value={this.state.body}
-              placeholder="Your post text*"
-              onChange={event => this.handleInputChange(event)}
-              required
-            />
-          </div>
-          <div>
-            <label>Select Category</label>
-            <div>
-              <div data-toggle="buttons">
-                {categories !== undefined &&
-                  categories.map(category => (
-                    <label key={category.path} onClick={this.selectCategory}>
-                      <input
-                        type="radio"
-                        name="category"
-                        value={category.name}
-                      />{' '}
-                      {category.name}
-                    </label>
-                  ))}
-              </div>
+      <div className="container">
+        <div className="row">
+          <main className="post blog-post col-lg-12">
+            <div className="add-comment">
+              <header>
+                <h3 className="h6">{formHeader}</h3>
+              </header>
+
+              <form onSubmit={onFormSubmit} className="commenting-form">
+                <div className="row">
+                  <div className="form-group col-md-12">
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="author"
+                      placeholder="Your name*"
+                      value={this.state.author}
+                      onChange={event => this.handleInputChange(event)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12">
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      rows="1"
+                      name="title"
+                      value={this.state.title}
+                      placeholder="Post title*"
+                      onChange={event => this.handleInputChange(event)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12">
+                    <textarea
+                      className="form-control"
+                      name="body"
+                      rows="3"
+                      value={this.state.body}
+                      placeholder="Your post text*"
+                      onChange={event => this.handleInputChange(event)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-12">
+                    <label>Select Category</label>
+                    <div className="btn-toolbar">
+                      <div className="btn-group" data-toggle="buttons">
+                        {categories !== undefined &&
+                          categories.map(category => (
+                            <label
+                              key={category.path}
+                              onClick={this.selectCategory}
+                              className={
+                                'btn btn-secondary' +
+                                (this.state.category === category.name
+                                  ? ' active'
+                                  : '')
+                              }
+                              style={{margin: "0px 5px 0px 0px"}}
+                            >
+                              <input
+                                type="radio"
+                                name="category"
+                                value={category.name}
+                              />{' '}
+                              {capitalizeFirst(category.name)}
+                            </label>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="form-group col-md-12">
+                    <button
+                      onClick={this.cancelPostUpdate}
+                      className="btn btn-primary"
+                      style={{ margin: '0px 5px 0px 0px' }}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="btn btn-primary"
+                      disabled={!this.state.category}
+                    >
+                      Save Post
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </div>
+          </main>
         </div>
-        <div>
-          <button onClick={this.cancelPostUpdate}>Cancel</button>
-          <button disabled={!this.state.category}>Save Post</button>
-        </div>
-      </form>
+      </div>
     )
   }
 }

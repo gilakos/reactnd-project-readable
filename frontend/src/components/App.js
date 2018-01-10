@@ -15,7 +15,6 @@ class App extends Component {
         <Switch>
           <Route path="/" component={AppHeader} />
         </Switch>
-        <hr />
         <Switch>
           <Route exact path="/" component={PostList} />
           <Route exact path="/category/:category" component={PostList} />

@@ -19,43 +19,48 @@ class PostComments extends Component {
 
     return (
       <div>
-        <div>
-          <h6>
-            {comments.length ? `Comments (${comments.length})` : 'No comments'}
-          </h6>
-        </div>
-        <ul>
-          {comments.map(comment => (
-            <CommentItem key={comment.id} comment={comment} />
-          ))}
-          <li>
-            <h6>
-              {comments.length ? 'Add a comment' : 'Start the conversation'}
-            </h6>
-            <form
-              onSubmit={this.handleCommentSubmit}
-              ref={commentForm => (this.commentForm = commentForm)}
-            >
-              <div>
+        { comments.map(comment => (
+          <CommentItem key={comment.id} comment={comment} />
+        ))}
+
+        <div className="add-comment">
+          <header>
+            <h3 className="h6">Leave a reply</h3>
+          </header>
+          <form
+            onSubmit={this.handleCommentSubmit}
+            ref={commentForm => (this.commentForm = commentForm)}
+            className="commenting-form"
+          >
+            <div className="row">
+              <div className="form-group col-md-12">
                 <input
+                  className="form-control"
                   type="text"
                   name="author"
                   placeholder="Your name"
                   required
                 />
               </div>
-              <div>
+              <div className="form-group col-md-12">
                 <textarea
+                  className="form-control"
                   name="body"
-                  rows="2"
-                  placeholder="Your comment"
+                  rows="3"
+                  placeholder={
+                    comments.length
+                      ? 'Add your comment'
+                      : 'Start the conversation'
+                  }
                   required
                 />
               </div>
-              <button>Add Comment</button>
-            </form>
-          </li>
-        </ul>
+              <div className="form-group col-md-12">
+                <button className="btn btn-secondary">Add Comment</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

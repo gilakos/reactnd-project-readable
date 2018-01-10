@@ -8,8 +8,8 @@ import App from './components/App'
 import store from './store'
 
 //import styles
-import './index.css'
-//import 'bootstrap/dist/css/bootstrap.css'
+// import './index.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 
 const router = (
   <Provider store={store}>

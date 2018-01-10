@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import custom components
-import VoteControls from './VoteControls'
-
 //import actions for comments
 import { removeComment } from '../actions/comments'
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt'
+import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
 
 class CommentControls extends Component {
   //handle edit comment click event
@@ -22,27 +23,23 @@ class CommentControls extends Component {
 
   render() {
     //extract comment from props
-    const { comment } = this.props
+    //const { comment } = this.props
 
     return (
-      <div>
-        <div>
-          <VoteControls entry={ comment } />
-          <button
-            onClick={() => {
-              this.handleEditComment()
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => {
-              this.handleDeleteComment()
-            }}
-          >
-            Delete
-          </button>
-        </div>
+      <div className="comments meta-last">
+        <FontAwesomeIcon
+          icon={faPencilAlt}
+          onClick={() => {
+            this.handleEditComment()
+          }}
+        />{' '}
+        {' '}
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          onClick={() => {
+            this.handleDeleteComment()
+          }}
+        />
       </div>
     )
   }

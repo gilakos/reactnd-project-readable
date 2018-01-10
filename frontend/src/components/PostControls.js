@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import custom components
-import VoteControls from './VoteControls'
-
 //import actions for post
 import { removePost } from '../actions/post'
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt'
+import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
 
 class PostControls extends Component {
   //handle edit post event
@@ -31,27 +32,23 @@ class PostControls extends Component {
 
   render() {
     //extract post from props
-    const { post } = this.props
+    //const { post } = this.props
 
     return (
-      <div>
-        <div>
-          <VoteControls entry={post} />
-          <button
-            onClick={() => {
-              this.handleEditPost()
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => {
-              this.handleDeletePost()
-            }}
-          >
-            Delete
-          </button>
-        </div>
+      <div className="comments meta-last">
+        <FontAwesomeIcon
+          icon={faPencilAlt}
+          onClick={() => {
+            this.handleEditPost()
+          }}
+        />{' '}
+        {' '}
+        <FontAwesomeIcon
+          icon={faTrashAlt}
+          onClick={() => {
+            this.handleDeletePost()
+          }}
+        />
       </div>
     )
   }

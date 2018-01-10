@@ -19,6 +19,7 @@ const post = (state = {}, action) => {
         ...state,
         post: undefined
       }
+
     //default: return state
     default:
       return state

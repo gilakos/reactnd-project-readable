@@ -6,6 +6,7 @@ import uuid from 'uuid'
 //import custom components
 import PostControls from './PostControls'
 import PostComments from './PostComments'
+import VoteControls from './VoteControls'
 
 //import actions for post and comments
 import { fetchPost } from '../actions/post'
@@ -13,6 +14,16 @@ import { addNewComment, fetchPostComments } from '../actions/comments'
 
 //import helper function
 import { fromNow } from '../utils/helpers'
+
+//import styles
+import '../css/index.css'
+import '../css/bootstrap-grid.css'
+import '../css/bootstrap-reboot.css'
+import '../css/bootstrap.css'
+
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import faComment from '@fortawesome/fontawesome-free-solid/faComment'
+import faClock from '@fortawesome/fontawesome-free-solid/faClock'
 
 class PostDetail extends Component {
   //fetch post and comments on mount
@@ -55,33 +66,83 @@ class PostDetail extends Component {
 
   render() {
     //extract post, comments, history from props
-    const { post, comments, history } = this.props
+    const { post, comments } = this.props
     //extract post id (if exists) from props
     const postId = this.props.match.params.id || false
     //get the comments for this post id
     const postComments = comments[postId] || []
 
     return (
-      <div>
-        <h3> {post.title} </h3>
-        <h5> Author: {post.author} </h5>
-        <h6> Category: {post.category} </h6>
-        <time> Posted: {fromNow(post.timestamp)} </time>
-        <hr />
-        <p> {post.body} </p>
-        <hr />
-        <p>
-          Votes: {post.voteScore} Comments: {post.commentCount}
-        </p>
-        <hr />
-        <PostControls post={post} history={history} />
-        <hr />
-        {postComments && (
-          <PostComments
-            comments={postComments}
-            onAddNewComment={this.handleAddNewComment}
-          />
-        )}
+      <div className="container">
+        <div className="row">
+          <main className="post blog-post col-lg-12">
+            <div className="container">
+              <div className="post-single">
+                <div
+                  className="post-details"
+                  style={{
+                  background: '#f5f5f5',
+                  padding: '5px 10px'
+                }}>
+                  <h1>{post.title}</h1>
+                  <div className="post-meta d-flex justify-content-between">
+                    <div className="category">
+                      <a href="">{post.category}</a>
+                    </div>
+                  </div>
+                  <div
+                    className="post-footer d-flex align-items-center flex-column flex-sm-row"
+                    style={{ fontSize: '.85rem' }}
+                  >
+                    <a
+                      href=""
+                      className="author d-flex align-items-center flex-wrap"
+                    >
+                      <div className="title">
+                        <span>{post.author}</span>
+                      </div>
+                    </a>
+                    <div className="d-flex align-items-center flex-wrap">
+                      <div className="date">
+                        <FontAwesomeIcon icon={faClock} />{' '}
+                        {fromNow(post.timestamp)}
+                      </div>
+                      <div className="comments meta-last">
+                        <FontAwesomeIcon icon={faComment} /> {post.commentCount}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="post-body">
+                    <p>{post.body}</p>
+                  </div>
+                  <footer
+                    className="post-footer d-flex align-items-center"
+                    style={{ fontSize: '.85rem' }}
+                  >
+                    <VoteControls entry={post} />
+                    <PostControls post={post} />
+                  </footer>
+                </div>
+                <div className="post-comments">
+                  <header>
+                    <h3 className="h6">
+                      Post Comments<span className="no-of-comments">
+                        {post.commentCount}
+                      </span>
+                    </h3>
+                  </header>
+
+                  {postComments && (
+                    <PostComments
+                      comments={postComments}
+                      onAddNewComment={this.handleAddNewComment}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
       </div>
     )
   }

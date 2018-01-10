@@ -5,11 +5,19 @@ import { Link } from 'react-router-dom'
 //import actions for categories
 import { fetchCategories, currentCategory } from '../actions/categories'
 
-class AppHeader extends Component {
+//import helper function
+import { capitalizeFirst } from '../utils/helpers'
 
+//import styles
+import '../css/index.css'
+import '../css/bootstrap-grid.css'
+import '../css/bootstrap-reboot.css'
+import '../css/bootstrap.css'
+
+class AppHeader extends Component {
   //fetch categories on mount
   componentDidMount() {
-    this.props.fetchCategories();
+    this.props.fetchCategories()
   }
 
   render() {
@@ -17,34 +25,46 @@ class AppHeader extends Component {
     const { categories } = this.props.categories
 
     return (
-      <nav>
-        <Link to="/">Home</Link>
-        <div>
-          <h6>Categories</h6>
-          <ul>
-            { categories !== undefined && categories.map(
-              category => (
-                <li
-                  key={category.path}
-                >
+      <header className="header">
+        <nav className="navbar navbar-expand-lg">
+          <div className="container">
+            <div className="navbar-header d-flex align-items-center justify-content-between">
+              <Link to="/" className="navbar-brand">
+                Readable
+              </Link>
+            </div>
+            <div id="navbarcollapse" className="collapse navbar-collapse">
+              <ul className="nav navbar-nav ml-auto">
+                {categories !== undefined &&
+                  categories.map(category => (
+                    <li
+                      key={category.path}
+                      className="nav-item"
+                      style={{padding: "0px 5px"}}
+                      >
+                      <Link
+                        to={`/category/${category.path}`}
+                        style={{color: 'gray'}}
+                        // className="active"
+                      >
+                        {capitalizeFirst(category.name)}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+              <div>
+                <button type="submit" className="btn btn-primary">
+                  {' '}
                   <Link
-                    to={`/category/${category.path}`}
-                    >
-                      {category.name}
-                    </Link>
-                </li>
-              )
-            )}
-            <li>
-              <Link
-                to='/create'
-                >
-                  Add Post
-                </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+                    to="/create"
+                    style={{color: 'white'}}
+                    >Add Post</Link>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
     )
   }
 }
@@ -62,6 +82,4 @@ const mapDispatchToProps = {
 }
 
 //connect component to Redux store
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AppHeader
-)
+export default connect(mapStateToProps, mapDispatchToProps)(AppHeader)

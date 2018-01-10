@@ -4,9 +4,13 @@ import FormSerialize from 'form-serialize'
 
 //import custom components
 import CommentControls from './CommentControls'
+import VoteControls from './VoteControls'
 
 //import actions for comments
 import { updateComment } from '../actions/comments'
+
+//import helper function
+import { fromNow } from '../utils/helpers'
 
 class CommentItem extends Component {
   //define state for if user is editing the comment
@@ -57,41 +61,70 @@ class CommentItem extends Component {
     return (
       // if the comment is being edited show form, otherwise render comment
       this.state.userEditing ? (
-        <li key={comment.id}>
-          <form
-            onSubmit={this.handleCommentUpdate}
-            ref={commentForm => (this.commentForm = commentForm)}
-          >
-            <div>
-              <input
-                type="text"
-                name="author"
-                placeholder="Your name"
-                defaultValue={comment.author}
-                required
-              />
-            </div>
-            <div>
-              <textarea
-                name="body"
-                rows="2"
-                placeholder="Your comment"
-                defaultValue={comment.body}
-                required
-              />
-            </div>
-            <button
-              onClick={this.cancelCommentUpdate}
-              >Cancel</button>
-            <button>Save</button>
-          </form>
-        </li>
+          <div className="add-comment" key={comment.id}>
+            <header>
+              <h3 className="h6">Leave a reply</h3>
+            </header>
+            <form
+              onSubmit={this.handleCommentUpdate}
+              ref={commentForm => (this.commentForm = commentForm)}
+              className="commenting-form">
+              <div className="row">
+                <div className="form-group col-md-12">
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="author"
+                    placeholder="Your name"
+                    defaultValue={comment.author}
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-12">
+                  <textarea
+                    className="form-control"
+                    name="body"
+                    rows="3"
+                    placeholder="Your comment"
+                    defaultValue={comment.body}
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-12">
+                  <button
+                    onClick={this.cancelCommentUpdate}
+                    className="btn btn-secondary"
+                    style={{margin: "0px 5px 0px 0px"}}
+                    >Cancel</button>
+                  <button
+                    className="btn btn-secondary"
+                    >Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
       ) : (
-        <li key={comment.id}>
-          <h5> Author: {comment.author} </h5>
-          <p> {comment.body} </p>
-          <CommentControls comment={comment} handleEditClick={this.editComment} />
-        </li>
+        <div className="comment" key={comment.id}>
+          <div className="comment-header d-flex justify-content-between">
+            <div className="user d-flex align-items-center">
+              <div className="title">
+                <strong>{comment.author}</strong><span className="date">{fromNow(comment.timestamp)}</span>
+              </div>
+            </div>
+          </div>
+          <div className="comment-body">
+            <p>
+              {comment.body}
+            </p>
+            <footer
+              className="post-footer d-flex align-items-center"
+              style={{ fontSize: '.85rem' }}
+              >
+                <VoteControls entry={comment} />
+                <CommentControls comment={comment} handleEditClick={this.editComment} />
+              </footer>
+          </div>
+        </div>
       )
     )
   }
