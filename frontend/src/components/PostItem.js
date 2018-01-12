@@ -21,7 +21,7 @@ import faClock from '@fortawesome/fontawesome-free-solid/faClock'
 class PostItem extends Component {
   render() {
     //extract post from props
-    const { post } = this.props
+    const { posts, post } = this.props
 
     return (
       <div className="container">
@@ -61,7 +61,7 @@ class PostItem extends Component {
                     <VoteControls entry={post} />
                   </div>
                   <div className="edit meta-last">
-                    <PostControls post={post} />
+                    <PostControls posts={posts} post={post} />
                   </div>
               </footer>
             </div>

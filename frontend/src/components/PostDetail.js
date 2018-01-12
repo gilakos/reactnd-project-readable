@@ -66,7 +66,7 @@ class PostDetail extends Component {
 
   render() {
     //extract post, comments, history from props
-    const { post, comments } = this.props
+    const { posts, post, comments } = this.props
     //extract post id (if exists) from props
     const postId = this.props.match.params.id || false
     //get the comments for this post id
@@ -120,7 +120,7 @@ class PostDetail extends Component {
                     style={{ fontSize: '.85rem' }}
                   >
                     <VoteControls entry={post} />
-                    <PostControls post={post} />
+                    <PostControls posts={posts} post={post} />
                   </footer>
                 </div>
                 <div className="post-comments">

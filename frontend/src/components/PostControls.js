@@ -32,7 +32,7 @@ class PostControls extends Component {
 
   render() {
     //extract post from props
-    //const { post } = this.props
+    // const { posts } = this.props
 
     return (
       <div className="comments meta-last">
@@ -55,7 +55,7 @@ class PostControls extends Component {
 }
 
 //subscribe component state to Redux store updates
-const mapStateToProps = ({ categories }) => ({
+const mapStateToProps = ({ posts, post, categories }) => ({
   categories
 })
 

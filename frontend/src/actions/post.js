@@ -29,11 +29,11 @@ export const addNewPost = post => dispatch =>
 export const updatePost = post => dispatch =>
   Api.putUpdatePost(post).then(data => dispatch(loadPost(data)))
 
-export const deletePost = post => ({
+export const deletePost = (post) => ({
   type: DELETE_POST,
   post
 })
 
 //remove post on server
-export const removePost = post => dispatch =>
+export const removePost = (post) => dispatch =>
   Api.deletePost(post.id).then(dispatch(deletePost(post)))
