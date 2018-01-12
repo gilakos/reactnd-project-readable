@@ -43,7 +43,7 @@ class AppHeader extends Component {
                       style={{padding: "0px 5px"}}
                       >
                       <Link
-                        to={`/category/${category.path}`}
+                        to={`/${category.path}`}
                         style={{color: 'gray'}}
                         // className="active"
                       >
