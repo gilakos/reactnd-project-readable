@@ -67,7 +67,24 @@ class PostList extends Component {
         {sortedPosts !== undefined && sortedPosts.length ? (
           sortedPosts.map(post => <PostItem key={post.id} post={post} />)
         ) : (
-          <p>No posts in {this.props.match.params.category} category </p>
+          <div className="container">
+            <div className="row">
+              <div
+                className="post col-xl-12"
+                style={{
+                  background: '#f5f5f5',
+                  margin: '10px',
+                  padding: '5px 10px'
+                }}
+              >
+                <div className="post-details">
+                  <h3 className="h3" style={{ margin: '6px 0px 2px' }}>
+                    No posts in {this.props.match.params.category} category
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     )
