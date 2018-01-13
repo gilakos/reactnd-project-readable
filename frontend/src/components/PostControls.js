@@ -55,7 +55,7 @@ class PostControls extends Component {
 }
 
 //subscribe component state to Redux store updates
-const mapStateToProps = ({ posts, post, categories }) => ({
+const mapStateToProps = ({ categories }) => ({
   categories
 })
 

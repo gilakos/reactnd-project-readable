@@ -3,7 +3,8 @@ import {
   LOAD_POSTS,
   LOAD_POST,
   LOAD_NEW_POST,
-  DELETE_POST
+  DELETE_POST,
+  LOAD_VOTE
 } from '../actions/action_constants'
 
 const posts = (state = {}, action) => {
@@ -34,6 +35,22 @@ const posts = (state = {}, action) => {
       return {
         ...state,
         posts: state.posts.filter( p => p.id !== post.id )
+      }
+    //return state and updated voteScore
+    case LOAD_VOTE:
+      const { id, score } = action
+      if ( state.posts !== undefined ) {
+        return {
+          ...state,
+          posts: state.posts.map((post) => {
+            if (post.id === id) {
+              post.voteScore = score
+            }
+            return post
+          })
+        }
+      } else {
+        return state
       }
     //default: return state
     default:

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //import actions for vote
+import { loadPost } from '../actions/post'
 import { submitVote } from '../actions/vote'
 
 import '../css/index.css'
@@ -57,13 +58,14 @@ class VoteControls extends Component {
 }
 
 //subscribe component state to Redux store updates
-const mapStateToProps = ({ vote }) => ({
+const mapStateToProps = ({ vote }, ownProps) => ({
   vote
 })
 
 //inject functions into component props
 const mapDispatchToProps = {
-  submitVote
+  submitVote,
+  loadPost
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VoteControls)
