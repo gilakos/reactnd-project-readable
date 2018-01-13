@@ -39,7 +39,7 @@ class PostEdit extends Component {
     //update post action
     this.props.updatePost(updatedPost).then(({ p }) => {
       //send to newly updated post page
-      this.props.history.push(`/post/${updatedPost.id}`)
+      this.props.history.push(`/${updatedPost.category}/${updatedPost.id}`)
     })
   }
 

@@ -76,7 +76,7 @@ class PostDetail extends Component {
       <div className="container">
         <div className="row">
           <main className="post blog-post col-lg-12">
-            {post && post.title ? (
+            {(post && post.title && this.props.match.params.category === post.category) ? (
               <div className="container">
                 <div className="post-single">
                   <div

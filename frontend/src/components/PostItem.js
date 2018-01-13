@@ -35,7 +35,7 @@ class PostItem extends Component {
             }}
           >
             <div className="post-details">
-              <Link to={`/category/${post.id}`}>
+              <Link to={`/${post.category}/${post.id}`}>
                 <h3 className="h3" style={{ margin: '6px 0px 2px' }}>
                   {' '}
                   {post.title}{' '}

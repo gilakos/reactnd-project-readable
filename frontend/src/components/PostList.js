@@ -17,7 +17,7 @@ class PostList extends Component {
     this.props.fetchPosts(category_filter)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     // if the category filter changes, request posts again
     if (nextProps.match.params.category !== this.props.match.params.category) {
       const category_filter = this.props.match.params.category || false

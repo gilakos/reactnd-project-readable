@@ -27,7 +27,7 @@ class PostCreate extends Component {
     //add new post action
     this.props.addNewPost( newPost ).then( ({ p }) => {
       //send to newly created post page
-      this.props.history.push(`/post/${newPost.id}`);
+      this.props.history.push(`/${newPost.category}/${newPost.id}`);
     })
   }
 
