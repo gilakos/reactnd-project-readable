@@ -76,71 +76,89 @@ class PostDetail extends Component {
       <div className="container">
         <div className="row">
           <main className="post blog-post col-lg-12">
-            <div className="container">
-              <div className="post-single">
-                <div
-                  className="post-details"
-                  style={{
-                  background: '#f5f5f5',
-                  padding: '5px 10px'
-                }}>
-                  <h1>{post.title}</h1>
-                  <div className="post-meta d-flex justify-content-between">
-                    <div className="category">
-                      <a href="">{post.category}</a>
-                    </div>
-                  </div>
+            {post && post.title ? (
+              <div className="container">
+                <div className="post-single">
                   <div
-                    className="post-footer d-flex align-items-center flex-column flex-sm-row"
-                    style={{ fontSize: '.85rem' }}
+                    className="post-details"
+                    style={{
+                      background: '#f5f5f5',
+                      padding: '5px 10px'
+                    }}
                   >
-                    <a
-                      href=""
-                      className="author d-flex align-items-center flex-wrap"
-                    >
-                      <div className="title">
-                        <span>{post.author}</span>
-                      </div>
-                    </a>
-                    <div className="d-flex align-items-center flex-wrap">
-                      <div className="date">
-                        <FontAwesomeIcon icon={faClock} />{' '}
-                        {fromNow(post.timestamp)}
-                      </div>
-                      <div className="comments meta-last">
-                        <FontAwesomeIcon icon={faComment} /> {post.commentCount}
+                    <h1>{post.title}</h1>
+                    <div className="post-meta d-flex justify-content-between">
+                      <div className="category">
+                        <a href="">{post.category}</a>
                       </div>
                     </div>
+                    <div
+                      className="post-footer d-flex align-items-center flex-column flex-sm-row"
+                      style={{ fontSize: '.85rem' }}
+                    >
+                      <a
+                        href=""
+                        className="author d-flex align-items-center flex-wrap"
+                      >
+                        <div className="title">
+                          <span>{post.author}</span>
+                        </div>
+                      </a>
+                      <div className="d-flex align-items-center flex-wrap">
+                        <div className="date">
+                          <FontAwesomeIcon icon={faClock} />{' '}
+                          {fromNow(post.timestamp)}
+                        </div>
+                        <div className="comments meta-last">
+                          <FontAwesomeIcon icon={faComment} />{' '}
+                          {post.commentCount}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="post-body">
+                      <p>{post.body}</p>
+                    </div>
+                    <footer
+                      className="post-footer d-flex align-items-center"
+                      style={{ fontSize: '.85rem' }}
+                    >
+                      <VoteControls entry={post} />
+                      <PostControls posts={posts} post={post} />
+                    </footer>
                   </div>
-                  <div className="post-body">
-                    <p>{post.body}</p>
-                  </div>
-                  <footer
-                    className="post-footer d-flex align-items-center"
-                    style={{ fontSize: '.85rem' }}
-                  >
-                    <VoteControls entry={post} />
-                    <PostControls posts={posts} post={post} />
-                  </footer>
-                </div>
-                <div className="post-comments">
-                  <header>
-                    <h3 className="h6">
-                      Post Comments<span className="no-of-comments">
-                        {post.commentCount}
-                      </span>
-                    </h3>
-                  </header>
+                  <div className="post-comments">
+                    <header>
+                      <h3 className="h6">
+                        Post Comments<span className="no-of-comments">
+                          {post.commentCount}
+                        </span>
+                      </h3>
+                    </header>
 
-                  {postComments && (
-                    <PostComments
-                      comments={postComments}
-                      onAddNewComment={this.handleAddNewComment}
-                    />
-                  )}
+                    {postComments && (
+                      <PostComments
+                        comments={postComments}
+                        onAddNewComment={this.handleAddNewComment}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="container">
+                <div className="post-single">
+                  <div
+                    className="post-details"
+                    style={{
+                      background: '#f5f5f5',
+                      padding: '5px 10px'
+                    }}
+                  >
+                    <h1>Post does not exist or has been deleted</h1>
+                  </div>
+                </div>
+              </div>
+            )}
           </main>
         </div>
       </div>
