@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome": "^1.1.1",
     "@fortawesome/fontawesome-free-solid": "^5.0.3",
     "@fortawesome/react-fontawesome": "^0.0.17",
-    "bootstrap": "4.0.0-beta",
+    "bootstrap": "^4.1.2",
     "form-serialize": "^0.7.2",
     "moment": "^2.20.1",
     "react": "^16.2.0",
